@@ -1,8 +1,8 @@
 ﻿{
   "version": "1.0.0-*",
-  "description": "IncrementalMeanVarianceAccumulator Class Library",
-  "authors": [ "Eamon" ],
-  "tags": [ "" ],
+  "description": "Online weighted Mean+Variance calculator",
+  "authors": [ "Eamon Nerbonne" ],
+  "tags": [ "mean", "variance", "weighted", "statistics", "average", "online" ],
   "projectUrl": "",
   "licenseUrl": "",
 
