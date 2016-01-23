@@ -35,7 +35,7 @@ namespace IncrementalMeanVarianceAccumulator
 		public double Weight => weightSum;
 
 		public static MeanVarianceAccumulator For(IEnumerable<double> vals) => vals.Aggregate(new MeanVarianceAccumulator(), (mv, v) => mv.Add(v));
-        public static MeanVarianceAccumulator Init(double val, double weight = 1.0) => new MeanVarianceAccumulator(weight, 0.0, val); //equivalent to adding to an empty distribution.
+        public static MeanVarianceAccumulator Init(double firstValue, double firstWeight = 1.0) => new MeanVarianceAccumulator(firstWeight, 0.0, firstValue); //equivalent to adding to an empty distribution.
         public static MeanVarianceAccumulator Empty => default(MeanVarianceAccumulator);
 
 		public override string ToString() => Mean.ToString(CultureInfo.InvariantCulture) + " +/- " + StandardDeviation.ToString(CultureInfo.InvariantCulture);
