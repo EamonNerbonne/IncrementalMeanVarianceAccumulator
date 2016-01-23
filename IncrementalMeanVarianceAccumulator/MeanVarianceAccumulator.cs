@@ -11,7 +11,6 @@ namespace IncrementalMeanVarianceAccumulator
 		readonly double weightSum, sX, meanX;
 		MeanVarianceAccumulator(double _weightSum, double _sX, double _meanX) { meanX = _meanX; sX = _sX; weightSum = _weightSum; }
 
-
 		public MeanVarianceAccumulator Add(double val, double weight = 1.0)
 		{
 			if (weight == 0.0) return this;//ignore zero-weight stuff...
@@ -41,6 +40,5 @@ namespace IncrementalMeanVarianceAccumulator
         public static MeanVarianceAccumulator Empty => default(MeanVarianceAccumulator);
 
 		public override string ToString() => Mean.ToString(CultureInfo.InvariantCulture) + " +/- " + StandardDeviation.ToString(CultureInfo.InvariantCulture);
-
 	}
 }
