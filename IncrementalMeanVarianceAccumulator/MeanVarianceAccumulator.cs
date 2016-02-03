@@ -30,12 +30,27 @@ namespace IncrementalMeanVarianceAccumulator
 			return new MeanVarianceAccumulator(newWeightSum, sX + other.sX + (other.meanX - meanX) * (other.meanX - meanX) * sScale, meanX + (other.meanX - meanX) * mScale);
 		}
 
-		public double Mean => meanX; 
-		public double Variance => sX / weightSum;
+        /// <summary>
+        /// The current (weighted) number of values that have been accumulated.  
+        /// This is equivalent to the sum of the weights. 
+        /// If all values have the default weight 1.0, this is equivalent to the count.
+        /// </summary>
+        public double WeightSum => weightSum;
+        public double Mean => meanX;
+        public double Variance => sX / weightSum;
 		public double StandardDeviation => Math.Sqrt(Variance);
+        /// <summary>
+        /// The sample variance is "sum of values divided by one less than the count"
+        /// This is only meaningful if weights are strictly stochastic, which really means: don't use this if you use weights.
+        /// The sample variance is undefined if WeightSum is 1.0  or less (it will return a meaningless value).
+        /// </summary>
 		public double SampleVariance => sX / (weightSum - 1.0);
+        /// <summary>
+        /// The sample standard deviation is the square root of the sample variance.
+        /// This is only meaningful if weights are strictly stochastic, which really means: don't use this if you use weights.
+        /// The sample standard deviation is undefined if WeightSum is 1.0  or less (it will return a meaningless value).
+        /// </summary>
 		public double SampleStandardDeviation => Math.Sqrt(SampleVariance);
-		public double Weight => weightSum;
 
 		public static MeanVarianceAccumulator FromEnumerable(IEnumerable<double> vals) => vals.Aggregate(new MeanVarianceAccumulator(), (mv, v) => mv.Add(v));
         public static MeanVarianceAccumulator Init(double firstValue, double firstWeight = 1.0) => new MeanVarianceAccumulator(firstWeight, 0.0, firstValue); //equivalent to adding to an empty distribution.
