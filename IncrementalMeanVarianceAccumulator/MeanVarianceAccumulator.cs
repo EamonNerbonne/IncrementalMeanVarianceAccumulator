@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace IncrementalMeanVarianceAccumulator
 {
@@ -10,7 +11,8 @@ namespace IncrementalMeanVarianceAccumulator
 		readonly double weightSum, sX, meanX;
 		MeanVarianceAccumulator(double _weightSum, double _sX, double _meanX) { meanX = _meanX; sX = _sX; weightSum = _weightSum; }
 
-		public MeanVarianceAccumulator Add(double val, double weight = 1.0)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public MeanVarianceAccumulator Add(double val, double weight = 1.0)
 		{
 			if (weight == 0.0) return this;//ignore zero-weight stuff...
 			double newWeightSum = weightSum + weight;
@@ -19,7 +21,8 @@ namespace IncrementalMeanVarianceAccumulator
 			return new MeanVarianceAccumulator(newWeightSum, sX + (val - meanX) * (val - meanX) * sScale, meanX + (val - meanX) * mScale);
 		}
 
-		public MeanVarianceAccumulator Add(MeanVarianceAccumulator other)
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public MeanVarianceAccumulator Add(MeanVarianceAccumulator other)
 		{
 			double newWeightSum = weightSum + other.weightSum;
 			double mScale = other.weightSum / newWeightSum;
