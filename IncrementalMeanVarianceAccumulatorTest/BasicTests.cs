@@ -13,7 +13,6 @@ namespace IncrementalMeanVarianceAccumulatorTest
     public class BasicTests
     {
         [Fact]
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void EmptyAccumulatorHasNanVariance()
         {
             var acc = MeanVarianceAccumulator.Empty;
