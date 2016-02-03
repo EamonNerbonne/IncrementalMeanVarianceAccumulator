@@ -1,5 +1,5 @@
 ﻿{
-    "version": "0.0.1-*",
+    "version": "0.0.2-*",
     "description": "Incrementally computes the variance, mean and count without needed several passes.",
     "authors": [ "Eamon Nerbonne" ],
     "title": "Incremental weighted mean/variance accumulator",
