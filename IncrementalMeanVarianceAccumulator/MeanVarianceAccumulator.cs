@@ -6,6 +6,27 @@ using System.Runtime.CompilerServices;
 
 namespace IncrementalMeanVarianceAccumulator
 {
+    /// <summary>
+    /// Accumulates the count, mean and variance of a sequence of weighted values. Values may be optionally weighted, in which case this struct accumulates the 
+    /// sum-of-weights, the weighted-mean, and the weighted-variance.
+    /// 
+    /// Note that the struct is IMMUTABLE, so:
+    /// 
+    /// MeanVarianceAccumulator.Init(3.0).Add(2.0).Add(1.0).Mean == 2.0
+    /// 
+    /// but
+    /// 
+    /// var x = MeanVarianceAccumulator.Empty;
+    /// x.Add(1.0);
+    /// x.Mean == 0.0
+    /// 
+    /// You can accumulate accumulators, which allows parallelization. e.g.
+    /// MeanVarianceAccumulator.Init(1.0).Add(3.0).Add(
+    ///         MeanVarianceAccumulator.Init(5.0).Add(7.0)
+    ///     ).Mean == 4.0
+    ///     
+    /// The algorithm is based on https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Weighted_incremental_algorithm
+    /// </summary>
 	public struct MeanVarianceAccumulator
 	{
 		readonly double weightSum, sX, meanX;
