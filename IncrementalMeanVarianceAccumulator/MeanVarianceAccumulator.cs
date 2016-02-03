@@ -84,10 +84,22 @@ namespace IncrementalMeanVarianceAccumulator
         [Pure]
         public double SampleStandardDeviation => Math.Sqrt(SampleVariance);
 
+        /// <summary>
+        /// Accumulates all values in the sequence.
+        /// </summary>
         [Pure]
         public static MeanVarianceAccumulator FromEnumerable(IEnumerable<double> vals) => vals.Aggregate(new MeanVarianceAccumulator(), (mv, v) => mv.Add(v));
+
+        /// <summary>
+        /// Represents the accumulation of one value.
+        /// Equivalent to MeanVarianceAccumulator.Empty.Add(...); 
+        /// </summary>
         [Pure]
         public static MeanVarianceAccumulator Init(double firstValue, double firstWeight = 1.0) => new MeanVarianceAccumulator(firstWeight, 0.0, firstValue); //equivalent to adding to an empty distribution.
+  
+        /// <summary>
+        /// The empty accumulator; equivalent to default(MeanVarianceAccumulator)
+        /// </summary>
         [Pure]
         public static MeanVarianceAccumulator Empty => default(MeanVarianceAccumulator);
 
