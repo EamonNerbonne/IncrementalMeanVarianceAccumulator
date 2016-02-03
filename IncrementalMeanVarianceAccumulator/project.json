@@ -1,21 +1,22 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "Online weighted Mean+Variance calculator",
-  "authors": [ "Eamon Nerbonne" ],
-  "tags": [ "mean", "variance", "weighted", "statistics", "average", "online" ],
-  "projectUrl": "",
-  "licenseUrl": "",
+    "version": "0.0.1-*",
+    "description": "Incrementally computes the variance, mean and count without needed several passes.",
+    "authors": [ "Eamon Nerbonne" ],
+    "title": "Incremental weighted mean/variance accumulator",
+    "tags": [ "mean", "variance", "weighted", "statistics", "average", "online", "incremental", "one-pass", "single-pass" ],
+    "projectUrl": "https://github.com/EamonNerbonne/IncrementalMeanVarianceAccumulator/",
+    "licenseUrl": "http://www.apache.org/licenses/LICENSE-2.0",
 
-  "frameworks": {
-    "net451": { },
-    "dotnet5.4": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Runtime": "4.0.21-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
-      }
+    "frameworks": {
+        "net451": { },
+        "dotnet5.4": {
+            "dependencies": {
+                "Microsoft.CSharp": "4.0.1-beta-23516",
+                "System.Collections": "4.0.11-beta-23516",
+                "System.Linq": "4.0.1-beta-23516",
+                "System.Runtime": "4.0.21-beta-23516",
+                "System.Threading": "4.0.11-beta-23516"
+            }
+        }
     }
-  }
 }
