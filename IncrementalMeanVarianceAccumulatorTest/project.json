@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0-*",
+  "description": "IncrementalMeanVarianceAccumulatorTest Class Library",
+  "authors": [ "Eamon" ],
+  "tags": [ "" ],
+  "projectUrl": "",
+  "licenseUrl": "",
+    "frameworks": {
+        "net46": {
+            "dependencies": {
+                "ExpressionToCodeLib": "1.5.4"
+            }
+        } 
+    },
+    "dependencies": {
+        "IncrementalMeanVarianceAccumulator": "1.0.0-*",
+        "xunit": "2.2.0-beta1-build3239",
+        "xunit.runner.visualstudio": "2.2.0-beta1-build1144"
+    }
+}

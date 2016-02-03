@@ -1,3 +1,4 @@
 .vs
 *.user
 IncrementalMeanVarianceAccumulator/project.lock.json
+IncrementalMeanVarianceAccumulatorTest/project.lock.json
