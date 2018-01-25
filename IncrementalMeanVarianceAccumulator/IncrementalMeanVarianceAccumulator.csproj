@@ -1,7 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <Version>0.1.0</Version>
+    <Version>1.0.0</Version>
     <Authors>Eamon Nerbonne</Authors>
     <Owners>Eamon Nerbonne</Owners>
     <Title>IncrementalMeanVarianceAccumulator</Title>
@@ -17,5 +16,7 @@
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageReleaseNotes>Added more doccomments, renamed FromEnumerable to FromSequence</PackageReleaseNotes>
   </PropertyGroup>
 </Project>
