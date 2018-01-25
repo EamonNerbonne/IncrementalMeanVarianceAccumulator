@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Globalization;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace IncrementalMeanVarianceAccumulator
@@ -10,6 +9,8 @@ namespace IncrementalMeanVarianceAccumulator
     /// <summary>
     /// Accumulates the count, mean and variance of a sequence of weighted values. Values may be optionally weighted, in which case this struct accumulates the 
     /// sum-of-weights, the weighted-mean, and the weighted-variance.
+    /// 
+    /// For greater efficiency, most methods are aggressively inlined, and no heap allocation is used.
     /// 
     /// Note that the struct is IMMUTABLE, so:
     /// 
@@ -28,11 +29,14 @@ namespace IncrementalMeanVarianceAccumulator
     ///     
     /// The algorithm is based on https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance#Weighted_incremental_algorithm
     /// </summary>
-	public struct MeanVarianceAccumulator
+    public struct MeanVarianceAccumulator
     {
         readonly double weightSum, sX, meanX;
         MeanVarianceAccumulator(double _weightSum, double _sX, double _meanX) { meanX = _meanX; sX = _sX; weightSum = _weightSum; }
 
+        /// <summary>
+        /// Combines the current set of accumulated values with a new value (optionally weighted), and returns the result.  This method does not alter the current accumulation; use the return value.
+        /// </summary>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MeanVarianceAccumulator Add(double val, double weight = 1.0)
         {
@@ -44,6 +48,9 @@ namespace IncrementalMeanVarianceAccumulator
             return new MeanVarianceAccumulator(newWeightSum, sX + (val - meanX) * (val - meanX) * sScale, meanX + (val - meanX) * mScale);
         }
 
+        /// <summary>
+        /// Combines the current set of accumulated values with another accumulation, and returns the result.  This method does not alter the current accumulation; use the return value.
+        /// </summary>
         [Pure, MethodImpl(MethodImplOptions.AggressiveInlining)]
         public MeanVarianceAccumulator Add(MeanVarianceAccumulator other)
         {
@@ -65,14 +72,22 @@ namespace IncrementalMeanVarianceAccumulator
         /// </summary>
         [Pure]
         public double Mean => meanX;
+        /// <summary>
+        /// The (weighted) variance of the accumulated values.  Returns NaN if empty.  Only the relative weights between the values matter; so two sets of identical values with weights that
+        /// differ only by some constant, positive scaling factor will result in the same variance (within a small margin of error due to floating point precision).
+        /// </summary>
         [Pure]
         public double Variance => sX / weightSum;
+        
+        /// <summary>
+        /// The square root of the variance.
+        /// </summary>
         [Pure]
         public double StandardDeviation => Math.Sqrt(Variance);
         /// <summary>
         /// The sample variance is "sum of values divided by one less than the count"
         /// This is only meaningful if weights are strictly stochastic, which really means: don't use this if you use weights.
-        /// The sample variance is undefined if WeightSum is 1.0  or less (it will return a meaningless value).
+        /// The sample variance is undefined if WeightSum is 1.0 or less (it will return a meaningless value).
         /// </summary>
         [Pure]
         public double SampleVariance => sX / (weightSum - 1.0);
@@ -85,10 +100,28 @@ namespace IncrementalMeanVarianceAccumulator
         public double SampleStandardDeviation => Math.Sqrt(SampleVariance);
 
         /// <summary>
+        /// Accumulates all values in the sequence.  (Note that iterating over an IEnumerable is relatively slow compared to other options here).
+        /// </summary>
+        [Pure]
+        public static MeanVarianceAccumulator FromSequence(IEnumerable<double> values)
+        {
+            var result = new MeanVarianceAccumulator();
+            foreach (var value in values)
+                result = result.Add(value);
+            return result;
+        }
+
+        /// <summary>
         /// Accumulates all values in the sequence.
         /// </summary>
         [Pure]
-        public static MeanVarianceAccumulator FromEnumerable(IEnumerable<double> vals) => vals.Aggregate(new MeanVarianceAccumulator(), (mv, v) => mv.Add(v));
+        public static MeanVarianceAccumulator FromSequence(double[] values)
+        {
+            var result = new MeanVarianceAccumulator();
+            foreach (var value in values)
+                result = result.Add(value);
+            return result;
+        }
 
         /// <summary>
         /// Represents the accumulation of one value.
