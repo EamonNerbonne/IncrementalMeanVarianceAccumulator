@@ -1,27 +1,21 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>Eamon Nerbonne</Authors>
+    <Owners>Eamon Nerbonne</Owners>
+    <Title>IncrementalMeanVarianceAccumulator</Title>
     <Description>Incrementally computes the variance, mean and count without needed several passes.</Description>
     <AssemblyTitle>Incremental weighted mean/variance accumulator</AssemblyTitle>
-    <VersionPrefix>0.1.0</VersionPrefix>
-    <Authors>Eamon Nerbonne</Authors>
-    <TargetFramework>net451</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>IncrementalMeanVarianceAccumulator</AssemblyName>
     <PackageId>IncrementalMeanVarianceAccumulator</PackageId>
     <PackageTags>mean;variance;weighted;statistics;average;online;incremental;one-pass;single-pass</PackageTags>
     <PackageProjectUrl>https://github.com/EamonNerbonne/IncrementalMeanVarianceAccumulator/</PackageProjectUrl>
     <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
-    <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
-    <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
-    <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-
 </Project>
