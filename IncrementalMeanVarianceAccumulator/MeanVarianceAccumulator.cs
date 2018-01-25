@@ -136,6 +136,9 @@ namespace IncrementalMeanVarianceAccumulator
         [Pure]
         public static MeanVarianceAccumulator Empty => default(MeanVarianceAccumulator);
 
+        /// <summary>
+        /// Returns a readable string representation including the current mean and standard deviation.
+        /// </summary>
         [Pure]
         public override string ToString() => Mean.ToString(CultureInfo.InvariantCulture) + " +/- " + StandardDeviation.ToString(CultureInfo.InvariantCulture);
     }
