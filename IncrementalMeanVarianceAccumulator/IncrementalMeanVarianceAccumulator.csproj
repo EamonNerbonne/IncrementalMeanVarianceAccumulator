@@ -11,7 +11,7 @@
     <PackageId>IncrementalMeanVarianceAccumulator</PackageId>
     <PackageTags>mean;variance;weighted;statistics;average;online;incremental;one-pass;single-pass</PackageTags>
     <PackageProjectUrl>https://github.com/EamonNerbonne/IncrementalMeanVarianceAccumulator/</PackageProjectUrl>
-    <PackageLicenseUrl>http://www.apache.org/licenses/LICENSE-2.0</PackageLicenseUrl>
+	<license>Apache-2.0</license>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
